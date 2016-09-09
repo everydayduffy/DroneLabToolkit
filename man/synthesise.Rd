@@ -4,12 +4,15 @@
 \alias{synthesise}
 \title{Synthesise dataflash logs}
 \usage{
-synthesise(in.folder, out.folder, leapsecs = seq(10:50), ...)
+synthesise(in.folder, out.folder, recursive = FALSE, leapsecs = seq(10:50),
+  ...)
 }
 \arguments{
 \item{in.folder}{The location of log files}
 
 \item{out.folder}{The location for output file}
+
+\item{recursive}{Recusively search folders?}
 
 \item{leapsecs}{Number leapseconds in GPS time since the epoch. default
 is 17}
