@@ -9,7 +9,7 @@
 
 synthesise <-
   # arguments needed for synthesise
-  function(in.folder,out.folder,leapsecs= seq(10:50),...){
+  function(in.folder,out.folder,recursive=FALSE,leapsecs= seq(10:50),...){
     ##Leapsecs to default at 17 (as of September 2015)
     if(missing(leapsecs)){leapsecs = 17}
     ##Default in and out directories working directory
@@ -20,7 +20,12 @@ synthesise <-
     ##GPS epoch date
     epochdate <- "1980-01-06 00:00:00"
     ##List all potential log files
-    files <- Sys.glob(paste0(in.folder,"/*.log"))
+    #files <- Sys.glob(paste0(in.folder,"/*.log"))
+    if(recursive==TRUE){
+      files <- list.files(path=in.folder, pattern="*\\.log$", recursive=TRUE)
+    } else {
+      files <- list.files(path=in.folder, pattern="*\\.log$", recursive=FALSE)
+    }
     ##Check valid files are present
     if(length(files)==0){
       stop('No valid log files found. Please choose a directory with .log files in it.')
