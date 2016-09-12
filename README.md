@@ -5,6 +5,7 @@ An `R` package for manipulating and harvesting data from log files produced by a
 
 ## Installation
 
-``devtools::install_github("everydayduffy/ArducopteR")
+```
+devtools::install_github("everydayduffy/ArducopteR")
 library(ArducopteR)
-``
+```
