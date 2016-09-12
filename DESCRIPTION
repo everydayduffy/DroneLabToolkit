@@ -1,10 +1,10 @@
 Package: ArducopteR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Synthesises information from Ardupilot log files.
 Version: 0.1.0
 Author: James P. Duffy
 Maintainer: James P. Duffy <james.philip.duffy@gmail.com>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Description:
+License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
