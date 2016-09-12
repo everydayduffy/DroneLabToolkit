@@ -2,6 +2,7 @@
 #'
 #' @param in.folder The location of log files
 #' @param out.folder The location for output file
+#' @param out.name The name of the output text file. Default is 'Synthesised_Logs'
 #' @param recursive Recusively search folders?
 #' @param leapsecs Number leapseconds in GPS time since the epoch. default
 #' is 17

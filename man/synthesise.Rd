@@ -4,13 +4,15 @@
 \alias{synthesise}
 \title{Synthesise dataflash logs}
 \usage{
-synthesise(in.folder, out.folder, recursive = FALSE, leapsecs = seq(10:50),
-  ...)
+synthesise(in.folder, out.folder, out.name = "Synthesised_Logs",
+  recursive = FALSE, leapsecs = seq(10:50), ...)
 }
 \arguments{
 \item{in.folder}{The location of log files}
 
 \item{out.folder}{The location for output file}
+
+\item{out.name}{The name of the output text file. Default is 'Synthesised_Logs'}
 
 \item{recursive}{Recusively search folders?}
 
