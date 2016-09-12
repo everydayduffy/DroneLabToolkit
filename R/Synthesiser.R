@@ -10,7 +10,7 @@
 
 synthesise <-
   # arguments needed for synthesise
-  function(in.folder,out.folder,recursive=FALSE,leapsecs= seq(10:50),...){
+  function(in.folder,out.folder,out.name="Synthesised_Logs",recursive=FALSE,leapsecs= seq(10:50),...){
     ##Leapsecs to default at 17 (as of September 2015)
     if(missing(leapsecs)){leapsecs = 17}
     ##Default in and out directories working directory
@@ -115,5 +115,5 @@ synthesise <-
         print("No data found")
       }
     }
-    write.table(output,paste0(out.folder,"/Synthesized_logs.txt"),row.names=F)
+    write.table(output,paste0(out.folder,"/",out.name,".txt"),row.names=F)
   }
