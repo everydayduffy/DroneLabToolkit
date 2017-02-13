@@ -9,7 +9,7 @@
 
 
 coord_convert_linux <-
-  function(in.path,out.path,crs.in="+init=epsg:4326",crs.out="+init=epsg:27700",){
+  function(in.path,out.path,crs.in="+init=epsg:4326",crs.out="+init=epsg:27700"){
   ##Extract GPS information original photographs
   raw.data <- as.data.frame(system(paste0("exiftool -T -n -filename -gpslongitude -gpslatitude -gpsaltitude ",
                                           in.path), inter=TRUE))
