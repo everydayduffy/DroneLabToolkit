@@ -8,6 +8,8 @@ exif_retag_linux(timediff = 0, photo.folder.path, log.file.path, proj.name,
   csv.out, leapsecs = seq(10:50))
 }
 \arguments{
+\item{timediff}{The difference in time between camera and GPS}
+
 \item{photo.folder.path}{The location photos to be tagged}
 
 \item{log.file.path}{The full path of the associated dataflash log}
@@ -18,8 +20,6 @@ exif_retag_linux(timediff = 0, photo.folder.path, log.file.path, proj.name,
 
 \item{leapsecs}{Number leapseconds in GPS time since the epoch. default
 is 17}
-
-\item{timedirr}{The difference in time between camera and GPS}
 }
 \description{
 Retag photos with GPS info from Ardupilot dataflash logs

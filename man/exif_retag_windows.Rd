@@ -8,6 +8,8 @@ exif_retag_windows(timediff = 0, photo.folder.path, log.file.path, proj.name,
   csv.out, leapsecs = seq(10:50), exif.tool.path)
 }
 \arguments{
+\item{timediff}{The difference in time between camera and GPS}
+
 \item{photo.folder.path}{The location photos to be tagged}
 
 \item{log.file.path}{The full path of the associated dataflash log}
@@ -20,8 +22,6 @@ exif_retag_windows(timediff = 0, photo.folder.path, log.file.path, proj.name,
 is 17}
 
 \item{exif.tool.path}{Full path of exiftool.exe location}
-
-\item{timedirr}{The difference in time between camera and GPS}
 }
 \description{
 Retag photos with GPS info from Ardupilot dataflash logs
