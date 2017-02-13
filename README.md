@@ -13,6 +13,33 @@ library(ArducopteR)
 
 ## Functions
 
+#### coord_convert_linux
+
+This function requires the installation of [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to work.
+It is used to read the GPS exif tags from one set of photos, converts them to a new coordinate system and writes the new coordinates back onto the photos. 
+
+##### Example
+
+```
+coord_convert_linux(in.path="./IN",out.path="./OUT",crs.in="+init=epsg:4326",
+crs.out="+init=epsg:27700")
+```
+
+#### coord_convert_windows
+
+This function requires the installation of [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to work.
+It is used to read the GPS exif tags from one set of photos, converts them to a new coordinate system and writes the new coordinates back onto the photos. 
+
+This function is identical to `coord_convert_linux` except that the location of `exiftool.exe` has to be defined. 
+
+##### Example
+
+```
+coord_convert_linux(in.path="./IN",out.path="./OUT",crs.in="+init=epsg:4326",
+crs.out="+init=epsg:27700")
+```
+
+
 #### exif_retag_linux
 
 This function requires the installation of [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to work.
