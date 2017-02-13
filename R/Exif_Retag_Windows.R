@@ -1,4 +1,4 @@
-#' Synthesise dataflash logs
+#' Retag photos with GPS info from Ardupilot dataflash logs
 #'
 #' @param timedirr The difference in time between camera and GPS
 #' @param photo.folder.path The location photos to be tagged
