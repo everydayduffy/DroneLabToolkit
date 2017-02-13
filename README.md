@@ -1,4 +1,4 @@
-# ArducopteR
+# DroneLabToolkit
 
 An `R` package for manipulating and harvesting data from log files produced by autopilots running the [Arducopter](http://www.arducopter.co.uk/) flight stack. Functions include synthesising logs and tagging
 photos with GPS data. 
