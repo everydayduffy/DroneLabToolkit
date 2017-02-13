@@ -35,10 +35,9 @@ This function is identical to `coord_convert_linux` except that the location of 
 ##### Example
 
 ```
-coord_convert_linux(in.path="./IN",out.path="./OUT",crs.in="+init=epsg:4326",
-crs.out="+init=epsg:27700")
+coord_convert_linux(in.path="C:/IN",out.path="C:/OUT",crs.in="+init=epsg:4326",
+crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe")
 ```
-
 
 #### exif_retag_linux
 
