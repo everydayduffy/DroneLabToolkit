@@ -7,8 +7,8 @@ photos with GPS data.
 ## Installation
 
 ```
-devtools::install_github("everydayduffy/ArducopteR")
-library(ArducopteR)
+devtools::install_github("everydayduffy/DroneLabToolkit")
+library(DroneLabToolkit)
 ```
 
 ## Functions
