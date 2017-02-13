@@ -4,14 +4,14 @@
 #' @param out.path The full path for output photos
 #' @param crs.in The native coordinate system
 #' @param crs.out The target coordinate system
-#' @param tool.path Full path of exiftool.exe location
+#' @param exif.tool.path Full path of exiftool.exe location
 #' @author James P. Duffy
 #' @export
 
 
 coord_convert_windows <-
   function(in.path,out.path,crs.in="+init=epsg:4326",crs.out="+init=epsg:27700",
-           tool.path){
+           exif.tool.path){
   ##Extract GPS information original photographs
   raw.data <- as.data.frame(system(paste0(tool.path,
                                           " -T -n -filename -gpslongitude -gpslatitude -gpsaltitude ",

@@ -5,7 +5,7 @@
 \title{Convert coordinates found in GPS exif tags}
 \usage{
 coord_convert_windows(in.path, out.path, crs.in = "+init=epsg:4326",
-  crs.out = "+init=epsg:27700", tool.path)
+  crs.out = "+init=epsg:27700", exif.tool.path)
 }
 \arguments{
 \item{in.path}{The full path of input photos}
@@ -16,7 +16,7 @@ coord_convert_windows(in.path, out.path, crs.in = "+init=epsg:4326",
 
 \item{crs.out}{The target coordinate system}
 
-\item{tool.path}{Full path of exiftool.exe location}
+\item{exif.tool.path}{Full path of exiftool.exe location}
 }
 \description{
 Convert coordinates found in GPS exif tags
