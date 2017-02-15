@@ -35,7 +35,7 @@ This function is identical to `coord_convert_linux` except that the location of 
 ##### Example
 
 ```
-coord_convert_linux(in.path="C:/IN",out.path="C:/OUT",crs.in="+init=epsg:4326",
+coord_convert_windows(in.path="C:/IN",out.path="C:/OUT",crs.in="+init=epsg:4326",
 crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe")
 ```
 
@@ -48,7 +48,7 @@ information collected by the autopilot.
 ##### Example
 
 ```
-exif.retag(timediff = 17, photo.folder.path = "./Photos", 
+exif_retag_linux(timediff = 17, photo.folder.path = "./Photos", 
 log.file.path = "./Logs/log1.log", proj.name = "project_1",
 csv.out = "./Output",leapsecs=17)
 ```
@@ -65,7 +65,7 @@ defined.
 ##### Example
 
 ```
-exif.retag(timediff = 17, photo.folder.path = "C:/Photos", 
+exif_retag_windows(timediff = 17, photo.folder.path = "C:/Photos", 
 log.file.path = "C:/Logs/log1.log", proj.name = "project_1",
 csv.out = "C:/Output",leapsecs=17,exif.tool.path="C:/exiftool/exiftool.exe")
 ```
