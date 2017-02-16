@@ -3,7 +3,7 @@
 An `R` package for manipulating and harvesting data from log files produced by autopilots running the [Arducopter](http://www.arducopter.co.uk/) flight stack. Functions include synthesising logs and tagging
 photos with GPS data. 
 
-This packages requires the following packages `dplyr`,`rgdal` and `tidyr`. 
+This package requires the following packages to work correctly `dplyr`,`rgdal` and `tidyr`. 
 
 
 ## Installation
