@@ -4,11 +4,12 @@ Title: Various functions for playing with dataflash logs.
 Version: 0.1.0
 Author: James P. Duffy
 Maintainer: James P. Duffy <james.philip.duffy@gmail.com>
-Description:
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 6.0.1
+Depends: R (>= 3.3.1)
 Imports:
     dplyr,
+    magrittr,
     sp,
     tidyr,
