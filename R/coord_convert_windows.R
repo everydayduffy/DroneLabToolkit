@@ -21,10 +21,10 @@ coord_convert_windows <-
     tidyr::separate(all, into =  c("name", "longitude","latitude", "altitude"), sep = "\t")
   coords <- cbind(Easting =as.numeric(as.character(exif.data$longitude)),
                   Northing =as.numeric(as.character(exif.data$latitude)))
-  exif.data.sp <-SpatialPointsDataFrame(coords,
+  exif.data.sp <-sp::SpatialPointsDataFrame(coords,
                                         data=data.frame(exif.data$name,exif.data$altitude),
                                         proj4string=CRS(crs.in))
-  exif.data.sp.out <-spTransform(exif.data.sp,CRS(crs.out))
+  exif.data.sp.out <-sp::spTransform(exif.data.sp,CRS(crs.out))
   ##Progress bar
   print("Retag progress")
   pb <- txtProgressBar(min = 0, max = nrow(exif.data.sp.out), style = 3)
