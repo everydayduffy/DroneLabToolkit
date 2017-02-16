@@ -15,8 +15,6 @@ exif_retag_windows <-
   # arguments for exif retag
   function(timediff=0,photo.folder.path,log.file.path,proj.name,csv.out,
            leapsecs= seq(10:50),exif.tool.path) {
-    library(dplyr)
-    library(tidyr)
     ##Leapsecs to default at 17 (as of September 2015)
     if(missing(leapsecs)){leapsecs = 17}
     ##Part 1: Obtain exif times
