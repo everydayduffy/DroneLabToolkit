@@ -3,6 +3,8 @@
 An `R` package for manipulating and harvesting data from log files produced by autopilots running the [Arducopter](http://www.arducopter.co.uk/) flight stack. Functions include synthesising logs and tagging
 photos with GPS data. 
 
+This packages requires the following packages `dplyr`,`rgdal` and `tidyr`. 
+
 
 ## Installation
 
@@ -21,7 +23,7 @@ It is used to read the GPS exif tags from one set of photos, converts them to a 
 ##### Example
 
 ```
-coord_convert_linux(in.path="./IN",out.path="./OUT",crs.in="+init=epsg:4326",
+coord_convert_linux(in.path="/home/IN",out.path="/home/OUT",crs.in="+init=epsg:4326",
 crs.out="+init=epsg:27700")
 ```
 
@@ -48,9 +50,9 @@ information collected by the autopilot.
 ##### Example
 
 ```
-exif_retag_linux(timediff = 17, photo.folder.path = "./Photos", 
-log.file.path = "./Logs/log1.log", proj.name = "project_1",
-csv.out = "./Output",leapsecs=17)
+exif_retag_linux(timediff = 17, photo.folder.path = "/home/Photos", 
+log.file.path = "/home/Logs/log1.log", proj.name = "project_1",
+csv.out = "/home/Output",leapsecs=17)
 ```
 
 #### exif_retag_windows
