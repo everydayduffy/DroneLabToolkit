@@ -18,7 +18,7 @@ exif_retag_windows <-
     ##Leapsecs to default at 17 (as of September 2015)
     if(missing(leapsecs)){leapsecs = 17}
     ##Part 1: Obtain exif times
-    exif.time.data <- as.data.frame(system(paste0(tool_path," -T -filename -createdate ",
+    exif.time.data <- as.data.frame(system(paste0(exif.tool.path," -T -filename -createdate ",
                                                 photo.folder.path), inter=TRUE))
     colnames(exif.time.data) <- "name_time_date"
     ##Tidy the data into separate columns
