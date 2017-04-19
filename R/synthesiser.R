@@ -104,7 +104,7 @@ synthesise <-
               output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":0",round((as.numeric(temp1[[1]][2])/100)*60,0))
             }
             ##Extract average (mode) altitude (rounded) to determine mission altitude
-            avg.alt.raw.data <- round(sub.gps.data$alt,0)
+            avg.alt.raw.data <- round(as.numeric(sub.gps.data$alt),0)
             output$Avg_Alt[i] <- names(table(avg.alt.raw.data))[table(avg.alt.raw.data)==max(table(avg.alt.raw.data))]
             ##Extract max altitutde to determine if flight was proper
             output$Max_Alt[i] <- max(as.numeric(sub.gps.data$alt))
