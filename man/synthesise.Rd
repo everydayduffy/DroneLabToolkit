@@ -17,7 +17,7 @@ synthesise(in.folder, out.folder, out.name = "Synthesised_Logs",
 \item{recursive}{Recursively search folders?}
 
 \item{leapsecs}{Number leapseconds in GPS time since the epoch. default
-is 17}
+is 18}
 }
 \description{
 Synthesise dataflash logs

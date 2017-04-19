@@ -19,7 +19,7 @@ exif_retag_linux(timediff = 0, photo.folder.path, log.file.path, proj.name,
 \item{csv.out}{Output folder for .csv file}
 
 \item{leapsecs}{Number leapseconds in GPS time since the epoch. default
-is 17}
+is 18}
 }
 \description{
 Retag photos with GPS info from Ardupilot dataflash logs

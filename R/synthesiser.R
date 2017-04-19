@@ -35,8 +35,8 @@ synthesise <-
     ##Create short file names without path
     short.files <- gsub(paste0(in.folder,"/"), "", files)
     ##Create output
-    output <- as.data.frame(matrix(,length(files),8))
-    colnames(output) <- c("Log_Name","Date","Time","Lat","Long","GPS_Duration_mins","Max_Alt","Firmware")
+    output <- as.data.frame(matrix(,length(files),9))
+    colnames(output) <- c("Log_Name","Date","Time","Lat","Long","GPS_Duration_mins","Avg_Alt","Max_Alt","Firmware")
     output$Log_Name <- short.files
     for (i in 1:length(files))
     {
@@ -103,6 +103,9 @@ synthesise <-
             } else {
               output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":0",round((as.numeric(temp1[[1]][2])/100)*60,0))
             }
+            ##Extract average (mode) altitude (rounded) to determine mission altitude
+            avg.alt.raw.data <- round(sub.gps.data$alt,0)
+            output$Avg_Alt[i] <- names(table(avg.alt.raw.data))[table(avg.alt.raw.data)==max(table(avg.alt.raw.data))]
             ##Extract max altitutde to determine if flight was proper
             output$Max_Alt[i] <- max(as.numeric(sub.gps.data$alt))
           }
