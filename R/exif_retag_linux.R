@@ -6,7 +6,7 @@
 #' @param proj.name A name for this project (appended to output .csv)
 #' @param csv.out Output folder for .csv file
 #' @param leapsecs Number leapseconds in GPS time since the epoch. default
-#' is 17
+#' is 18
 #' @author James P. Duffy
 #' @export
 
@@ -14,8 +14,8 @@ exif_retag_linux <-
   # arguments for exif retag
   function(timediff=0,photo.folder.path,log.file.path,proj.name,csv.out,
            leapsecs= seq(10:50)) {
-    ##Leapsecs to default at 17 (as of September 2015)
-    if(missing(leapsecs)){leapsecs = 17}
+    ##Leapsecs to default at 18 (as of December 2016)
+    if(missing(leapsecs)){leapsecs = 18}
     ##Part 1: Obtain exif times
     exif.time.data <- as.data.frame(system(paste0("exiftool -T -filename -createdate ",
                                                   photo.folder.path), inter=TRUE))
