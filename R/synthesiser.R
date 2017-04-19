@@ -5,15 +5,15 @@
 #' @param out.name The name of the output text file. Default is 'Synthesised_Logs'
 #' @param recursive Recursively search folders?
 #' @param leapsecs Number leapseconds in GPS time since the epoch. default
-#' is 17
+#' is 18
 #' @author James P. Duffy
 #' @export
 
 synthesise <-
   # arguments needed for synthesise
   function(in.folder,out.folder,out.name="Synthesised_Logs",recursive=FALSE,leapsecs= seq(10:50),...){
-    ##Leapsecs to default at 17 (as of September 2015)
-    if(missing(leapsecs)){leapsecs = 17}
+    ##Leapsecs to default at 18 (as of December 2016)
+    if(missing(leapsecs)){leapsecs = 18}
     ##Default in and out directories working directory
     if(missing(in.folder)){in.folder=getwd()}
     if(missing(out.folder)){out.folder=getwd()}
