@@ -96,7 +96,7 @@ defined.
 ##### Example
 
 ```
-exif_retag_windows(timediff = 17, photo.folder.path = "C:/Photos",
+extract_gps_attitude_windows(timediff = 17, photo.folder.path = "C:/Photos",
 log.file.path = "C:/Logs/log1.log", proj.name = "project_1",
 csv.out = "C:/Output",leapsecs=17,exif.tool.path="C:/exiftool/exiftool.exe")
 ```
