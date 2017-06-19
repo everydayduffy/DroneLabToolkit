@@ -17,7 +17,7 @@ extract_gps_attitude_linux <-
     ##Leapsecs to default at 18 (as of December 2016)
     if(missing(leapsecs)){leapsecs = 18}
     ##Part 1: Obtain exif times
-    exif.time.data <- as.data.frame(system(paste0(exif.tool.path," -T -filename -createdate ",
+    exif.time.data <- as.data.frame(system(paste0(exiftool," -T -filename -createdate ",
                                                   photo.folder.path), inter=TRUE))
     colnames(exif.time.data) <- "name_time_date"
     ##Tidy the data into separate columns
