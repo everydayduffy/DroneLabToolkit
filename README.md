@@ -23,8 +23,8 @@ It is used to read the GPS exif tags from one set of photos, converts them to a 
 ##### Example
 
 ```
-coord_convert_linux(in.path="/home/IN",out.path="/home/OUT",crs.in="+init=epsg:4326",
-crs.out="+init=epsg:27700")
+coord_convert_linux(in.path="/home/IN",crs.in="+init=epsg:4326",
+crs.out="+init=epsg:27700",csv=TRUE)
 ```
 
 #### coord_convert_windows
@@ -37,8 +37,8 @@ This function is identical to `coord_convert_linux` except that the location of 
 ##### Example
 
 ```
-coord_convert_windows(in.path="C:/IN",out.path="C:/OUT",crs.in="+init=epsg:4326",
-crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe")
+coord_convert_windows(in.path="C:/IN",crs.in="+init=epsg:4326",
+crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe", csv=TRUE)
 ```
 
 #### exif_retag_linux
