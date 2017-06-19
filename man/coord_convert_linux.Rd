@@ -4,17 +4,19 @@
 \alias{coord_convert_linux}
 \title{Convert coordinates found in GPS exif tags}
 \usage{
-coord_convert_linux(in.path, out.path, crs.in = "+init=epsg:4326",
-  crs.out = "+init=epsg:27700")
+coord_convert_linux(in.path, crs.in = "+init=epsg:4326",
+  crs.out = "+init=epsg:27700", csv = TRUE)
 }
 \arguments{
 \item{in.path}{The full path of input photos}
 
-\item{out.path}{The full path for output photos}
-
 \item{crs.in}{The native coordinate system}
 
 \item{crs.out}{The target coordinate system}
+
+\item{csv}{Write a .csv file with converted coordinates?}
+
+\item{out.path}{The full path for output photos}
 }
 \description{
 Convert coordinates found in GPS exif tags

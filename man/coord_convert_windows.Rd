@@ -4,19 +4,19 @@
 \alias{coord_convert_windows}
 \title{Convert coordinates found in GPS exif tags}
 \usage{
-coord_convert_windows(in.path, out.path, crs.in = "+init=epsg:4326",
-  crs.out = "+init=epsg:27700", exif.tool.path)
+coord_convert_windows(in.path, crs.in = "+init=epsg:4326",
+  crs.out = "+init=epsg:27700", exif.tool.path, csv = TRUE)
 }
 \arguments{
 \item{in.path}{The full path of input photos}
-
-\item{out.path}{The full path for output photos}
 
 \item{crs.in}{The native coordinate system}
 
 \item{crs.out}{The target coordinate system}
 
 \item{exif.tool.path}{Full path of exiftool.exe location}
+
+\item{csv}{Write a .csv file with converted coordinates?}
 }
 \description{
 Convert coordinates found in GPS exif tags
