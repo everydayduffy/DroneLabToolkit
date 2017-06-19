@@ -39,7 +39,7 @@ coord_convert_windows <-
     system(paste0(exif.tool.path," -overwrite_original -q -gpslongitude=", exif.data.sp.out@coords[i,1],
                   " -gpslatitude=", exif.data.sp.out@coords[i,2], " -gpsaltitude=",
                   exif.data.sp.out@data$exif.data.altitude[i]," -gpslatituderef=N",
-                  " -gpslongituderef=E", " -gpsaltituderef=above ",out.path, "/",
+                  " -gpslongituderef=E", " -gpsaltituderef=above ",in.path, "/",
                   exif.data.sp.out@data$exif.data.name[i]), inter = TRUE)
     setTxtProgressBar(pb, i)
   }
