@@ -121,5 +121,6 @@ synthesise <-
         print("No data found")
       }
     }
-    write.table(output,paste0(out.folder,"/",out.name,".txt"),row.names=F)
+    write.table(output,paste0(out.folder,"/",out.name,".txt"),row.names=F,
+                sep = ",")
   }
