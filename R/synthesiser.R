@@ -36,13 +36,15 @@ synthesise <-
     short.files <- gsub(paste0(in.folder,"/"), "", files)
     ##Create output
     output <- as.data.frame(matrix(,length(files),9))
-    colnames(output) <- c("Log_Name","Date","Time","Lat","Long","GPS_Duration_mins","Avg_Alt","Max_Alt","Firmware")
+    colnames(output) <- c("Log_Name","Date","Time","Lat","Long",
+                          "GPS_Duration_mins","Avg_Alt","Max_Alt","Firmware")
     output$Log_Name <- short.files
     for (i in 1:length(files))
     {
       ##Read in the .log file
       logname <- files[i]
-      raw.data <- read.delim(logname,h=F,sep=",",stringsAsFactors=FALSE)
+      raw.data <- read.delim(paste0(in.folder,"/",logname),h=F,sep=",",
+                             stringsAsFactors=FALSE)
       print(paste0("Processing ",short.files[i]))
       ##Subset the GPS data
       gps.data <- raw.data[which(raw.data[,1]=="GPS"),]
