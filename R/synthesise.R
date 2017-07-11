@@ -44,13 +44,22 @@ synthesise <-
     {
       ##Read in the .log file
       logname <- files[i]
+
       raw.data <- read.delim(paste0(in.folder,"/",logname),h=F,sep=",",
                              stringsAsFactors=FALSE)
+
       print(paste0("Processing ",short.files[i]))
+
       ##Subset the GPS data
-      gps.data <- raw.data[which(raw.data[,1]=="GPS"),]
+      gps.data <- raw.data %>%
+        dplyr::filter(.,V1 == "GPS") %>%
+        data.frame
+
       print("Extracting GPS data")
-      ##Add a check for whether GPS data is present, if not skips to near end of loop
+
+      ##Add a check for whether GPS data is present, if not skips to
+      ##near end of loop
+
       if (dim(gps.data)[1]!=0) {
         ##Add a check for the type of log and adjust column searches
         if (dim(raw.data)[2]<19) {
@@ -62,24 +71,38 @@ synthesise <-
         ##Subset MSG data
         ##Save firmware version to output
         print("Extracting Firmware version")
-        msg.data <- raw.data[which(raw.data[,1]=="MSG"),]
-        ##Grep the firmware version from the MSG part of the log (select the first if there are multiple)
-        output$Firmware[i] <- msg.data[grep("Ardu|APM:",msg.data[,(2+add.val)]),(2+add.val)][1]
+
+        ##Subset message data
+        msg.data <- raw.data %>%
+          dplyr::filter(.,V1 == "MSG") %>%
+          data.frame()
+
+        ##Grep the firmware version from the MSG part of the log (select
+        ##the first if there are multiple)
+        output$Firmware[i] <- msg.data[grep("Ardu|APM:",msg.data[,(2+add.val)]),
+                                       (2+add.val)][1]
+
         ##Get rid of white space in 'GPS Status column' so that it can be
         ##checked properly
         gps.data[,2+add.val] <- gsub(" ", "",gps.data[,(2+add.val)])
+
         ##Check for 3D fixes
         if (max(gps.data[,2+add.val])>=3) {
+
           ##Filter out data that is only 3D fixes
           gps.data <- gps.data[which(gps.data[,2+add.val]>=3),]
           ##Get mean lat and long values and store in table
-          output$Lat[i] <- mean(as.numeric(gps.data[1:dim(gps.data)[1],(7+add.val)]))
-          output$Long[i] <- mean(as.numeric(gps.data[1:dim(gps.data)[1],(8+add.val)]))
+          output$Lat[i] <- mean(as.numeric(gps.data[1:dim(gps.data)[1],
+                                                    (7+add.val)]))
+          output$Long[i] <- mean(as.numeric(gps.data[1:dim(gps.data)[1],
+                                                     (8+add.val)]))
           ##Get GPS start and end times to create duration value
           ##Filter out relevant columns
-          sub.gps.data <- data.frame(gps.data[,(2+add.val):(4+add.val)],gps.data[,(7+add.val):(9+add.val)])
+          sub.gps.data <- data.frame(gps.data[,(2+add.val):(4+add.val)],
+                                     gps.data[,(7+add.val):(9+add.val)])
           ##Add column names
-          colnames(sub.gps.data) <- c("status","timeMS","weeks","lat","long","alt")
+          colnames(sub.gps.data) <- c("status","timeMS","weeks","lat","long",
+                                      "alt")
           ##Convert 'weeks' data into numeric values
           sub.gps.data$weeks <- as.numeric(as.character(sub.gps.data$weeks))
           ##Create a list of GPS 'epoch' dates on which to add GPS times to
@@ -87,12 +110,14 @@ synthesise <-
           ##Format them correctly so 'seconds' can be added
           epoch$time <- strptime(epoch$time,"%Y-%m-%d %H:%M:%S")
           ##Add seconds calculated from the data to the 'epoch' times
-          epoch$time <- epoch$time + (sub.gps.data$weeks*secsweek) + (as.numeric(sub.gps.data$timeMS)/1000) - leapsecs
+          epoch$time <- epoch$time + (sub.gps.data$weeks*secsweek) +
+            (as.numeric(sub.gps.data$timeMS)/1000) - leapsecs
           ##Store time and date separately in output file
           output$Date[i] <- strsplit(as.character(epoch$time[1])," +")[[1]][1]
           output$Time[i] <- strsplit(as.character(epoch$time[1])," +")[[1]][2]
           ##Calculate time difference in minutes (using first and last date/times)
-          output$GPS_Duration_mins[i] <- round(as.numeric(difftime(epoch$time[dim(epoch)[1]],epoch$time[1],units="mins")),2)
+          output$GPS_Duration_mins[i] <- round(as.numeric(difftime(epoch$time[dim(epoch)[1]],
+                                                                   epoch$time[1],units="mins")),2)
           ##Format time into mm:ss
           temp1 <- strsplit(as.character(output$GPS_Duration_mins[i]),"[.]")
           ##If the value is a whole number (i.e just mins, no secs)
@@ -101,10 +126,12 @@ synthesise <-
           } else {
             ##If the seconds value is 2 digits (more than 9 seconds), then stitch them next to minutes
             if (round((as.numeric(temp1[[1]][2])/100)*60,0)>9) {
-              output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":",round((as.numeric(temp1[[1]][2])/100)*60,0))
+              output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":",
+                                                    round((as.numeric(temp1[[1]][2])/100)*60,0))
               ##Otherwise, add a trailing 0 before stitching
             } else {
-              output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":0",round((as.numeric(temp1[[1]][2])/100)*60,0))
+              output$GPS_Duration_mins[i] <- paste0(temp1[[1]][1],":0",
+                                                    round((as.numeric(temp1[[1]][2])/100)*60,0))
             }
             ##Extract average (mode) altitude (rounded) to determine mission altitude
             avg.alt.raw.data <- round(as.numeric(sub.gps.data$alt),0)
