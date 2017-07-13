@@ -5,6 +5,7 @@
 #' @param crs.in The native coordinate system
 #' @param crs.out The target coordinate system
 #' @param csv Write a .csv file with converted coordinates?
+#' @importFrom magrittr "%>%"
 #' @author James P. Duffy
 #' @export
 

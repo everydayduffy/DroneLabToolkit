@@ -8,6 +8,7 @@
 #' @param leapsecs Number leapseconds in GPS time since the epoch. default
 #' is 18
 #' @param exif.tool.path Full path of exiftool.exe location
+#' @importFrom magrittr "%>%"
 #' @author James P. Duffy
 #' @export
 
