@@ -112,3 +112,7 @@ as a `.csv`.
 synthesise(in.folder="C:/Logs",out.folder="C:/Out",out.name="my_logs",
 recursive=TRUE,leapsecs=17)
 ```
+
+## Stuck?
+
+Help can be found over at the [Wiki](https://github.com/everydayduffy/DroneLabToolkit/wiki/Calculating-TIme-Difference) (e.g. on how to calculate time difference (`timediff`)).
