@@ -2,29 +2,29 @@
 % Please edit documentation in R/exif_retag_windows.R
 \name{exif_retag_windows}
 \alias{exif_retag_windows}
-\title{Retag photos with GPS info from Ardupilot dataflash logs}
+\title{Retag images with GPS info from Ardupilot dataflash logs}
 \usage{
-exif_retag_windows(timediff = 0, photo.folder.path, log.file.path, proj.name,
-  csv.out, leapsecs = seq(10:50), exif.tool.path)
+exif_retag_windows(time_diff = 0, img_path, log_file, proj_name, csv_out,
+  leap_secs = seq(10:50), exif_tool_path)
 }
 \arguments{
-\item{timediff}{The difference in time between camera and GPS}
+\item{time_diff}{The difference in time between camera and GPS}
 
-\item{photo.folder.path}{The location photos to be tagged}
+\item{img_path}{The location images to be tagged}
 
-\item{log.file.path}{The full path of the associated dataflash log}
+\item{log_file}{The full path of the associated dataflash log}
 
-\item{proj.name}{A name for this project (appended to output .csv)}
+\item{proj_name}{A name for this project (appended to output .csv)}
 
-\item{csv.out}{Output folder for .csv file}
+\item{csv_out}{Output folder for .csv file}
 
-\item{leapsecs}{Number leapseconds in GPS time since the epoch. default
+\item{leap_secs}{Number leapseconds in GPS time since the epoch. default
 is 18}
 
-\item{exif.tool.path}{Full path of exiftool.exe location}
+\item{exif_tool_path}{Full path of exiftool.exe location}
 }
 \description{
-Retag photos with GPS info from Ardupilot dataflash logs
+Retag images with GPS info from Ardupilot dataflash logs
 }
 \author{
 James P. Duffy
