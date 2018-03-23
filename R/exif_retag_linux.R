@@ -1,7 +1,7 @@
 #' Retag images with GPS info from Ardupilot dataflash logs
 #'
 #' @param time_diff The difference in time between camera and GPS
-#' @param img_path The location photos to be tagged
+#' @param img_path The location images to be tagged
 #' @param log_file The full path of the associated dataflash log
 #' @param proj_name A name for this project (appended to output .csv)
 #' @param csv_out Output folder for .csv file
@@ -35,7 +35,7 @@ exif_retag_linux <-
       data.frame()
 
     ##############################################
-    ##Part 2: Match up photo times with log data##
+    ##Part 2: Match up image times with log data##
     ##############################################
 
     ##Read in bin log that has been converted to .log file
