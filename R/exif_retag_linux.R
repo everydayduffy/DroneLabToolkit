@@ -7,6 +7,7 @@
 #' @param csv_out Output folder for .csv file
 #' @param leap_secs Number leapseconds in GPS time since the epoch. default
 #' is 18
+#' @importFrom magrittr "%>%"
 #' @author James P. Duffy
 #' @export
 
