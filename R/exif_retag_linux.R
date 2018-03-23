@@ -25,11 +25,12 @@ exif_retag_linux <-
     ##Part 1: Obtain exif times
     exif_times <- as.data.frame(system(paste0("exiftool -T -filename -createdate ",
                                                   img_path), inter=TRUE))
-    colnames(exif_times) <- "name_time_date"
+
+    colnames(exif_times) <- "name_date_time"
     ##Tidy the data into separate columns
-    exif_times <- tidyr::separate(exif_times, name_time_date,
-                                  into =  c("name", "time"), sep ="\t") %>%
-      tidyr::separate(.,time, into =  c("date", "time"), sep =" ") %>%
+    exif_times <- tidyr::separate(exif_times, name_date_time,
+                                  into =  c("name", "date_time"), sep ="\t") %>%
+      tidyr::separate(.,date_time, into =  c("date", "time"), sep =" ") %>%
       data.frame()
 
     ##############################################
@@ -49,7 +50,7 @@ exif_retag_linux <-
     ##Filter out relevant columns
     log_data <- dplyr::select(log_data, c((2+add.val):(4+add.val),(7+add.val):(9+add.val)))
     ##Add column names
-    colnames(log_data) <- c("status","timeMS","weeks","lat","long","alt")
+    colnames(log_data) <- c("status","timeMS","weeks","lat","lon","alt")
     ##Convert 'weeks' data into numeric values
     log_data <- log_data %>%
       dplyr::mutate(.,weeks = as.numeric(as.character(weeks)))
@@ -61,53 +62,65 @@ exif_retag_linux <-
     epoch$time <- epoch$time + (log_data$weeks*secs_week) + (as.numeric(log_data$timeMS)/1000) - leap_secs
     ##Add the time offset from particular dataset (defined at top of script)
     epoch$newtime <- epoch$time + time_diff
-    ##Split date and time into 2 (both old and new)
-    epoch <- data.frame(do.call('rbind', strsplit(as.character(epoch$time),' ',fixed=TRUE)),do.call('rbind', strsplit(as.character(epoch$newtime),' ',fixed=TRUE)))
-    ##Drop the extra date column (duplicate)
-    epoch <- dplyr::select(epoch, -3)
-    colnames(epoch) <- c("date","oldtime","time")
+
+    ##Split date and time into 2 (both old and new) and format
+    epoch <- epoch %>%
+      tidyr::separate(.,time, c("date1","oldtime"), sep = " ") %>%
+      tidyr::separate(.,newtime, c("date2","time"), sep = " ") %>%
+      dplyr::select(., -date2) %>%
+      dplyr::rename(date = date1) %>%
+      data.frame()
+
     ##Reshuffle data to get relevant information for merging with exif data
-    log_data <- data.frame(epoch$date,epoch$oldtime,epoch$time,log_data$long,log_data$lat,log_data$alt)
-    colnames(log_data) <- c("date","oldtime","time","long","lat","alt")
-    ##Removes duplicates, just taking the first reading for each second
-    log_data <- subset(log_data, !duplicated(log_data$oldtime))
-    ##Remove whitespace
-    log_data[c('long', 'lat', 'alt', 'time')] <- lapply(log_data[c('long', 'lat', 'alt', 'time')], gsub, pattern=" ",replacement="")
-    ##Tidy up dates and times to make them match
-    log_data$date <- gsub(":", "-", log_data$date)
-    exif_times$date <- gsub(":", "-", exif_times$date)
-    combo <- merge(x=exif_times, y=log_data, by= c("date","time"))
-    ##Create a new columns with N/S/E/W references for lat long - to feed into exiftool
-    combo$hor <- rep(NA,nrow(combo))
-    combo$ver <- rep(NA,nrow(combo))
-    ##For longitudes, choose E/W. For latitudes, choose N/S
-    for (i in 1:dim(combo)[1])
-    {
-      if (as.numeric(combo$long[i])<0) {
-        combo$hor[i] <- "W"
-      } else {
-        combo$hor[i] <- "E"
-      }
-      if (as.numeric(combo$lat[i])<0) {
-        combo$ver[i] <- "S"
-      } else {
-        combo$ver[i] <- "N"
-      }
-    }
-    ##Combine useful info into a .csv
-    min_output <- data.frame(combo$name,combo$time,combo$long,combo$lat,combo$alt,combo$hor,combo$ver)
-    colnames(min_output) <- c("name","time","long","lat","alt","hor","ver")
-    ##Write the .csv
+    log_data <- data.frame(epoch$date,epoch$oldtime,epoch$time,log_data$lon,log_data$lat,log_data$alt)
+    colnames(log_data) <- c("date","oldtime","time","lon","lat","alt")
+
+    log_data <- log_data %>%
+      #remove duplicate times (one reading per second)
+      dplyr::distinct(., oldtime, .keep_all=TRUE) %>%
+      #tidy up whitespace
+      dplyr::mutate(., lon = gsub(" ", "", lon)) %>%
+      dplyr::mutate(., lat = gsub(" ", "", lat)) %>%
+      dplyr::mutate(., alt = gsub(" ", "", alt)) %>%
+      dplyr::mutate(., time = gsub(" ", "", time)) %>%
+      #tidy up dates and times to make them match
+      dplyr::mutate(., date = gsub(":", "-", date)) %>%
+      data.frame()
+
+    #tidy up dates and times to make them match
+    exif_times <- dplyr::mutate(exif_times, date = gsub(":", "-", date))
+
+    #join image data to position data
+    combo <- dplyr::left_join(exif_times, log_data, by = c("date", "time")) %>%
+      #apply NESW labels for exif tagging
+      dplyr::mutate(., hor = dplyr::case_when(
+        as.numeric(lon) < 0 ~ "W",
+        as.numeric(lon) >= 0 ~ "E")) %>%
+      dplyr::mutate(., ver = dplyr::case_when(
+        as.numeric(lat) < 0 ~ "S",
+        as.numeric(lat) >= 0 ~ "N")) %>%
+      data.frame()
+
+    #combine useful info into a .csv
+    min_output <- combo %>%
+      dplyr::select(., name, time, lon, lat, alt, hor, ver) %>%
+      data.frame()
+
+    #write the .csv
     write.csv(min_output, paste0(csv_out,"/",proj_name,"_exif_merge.csv"),row.names=F,quote=FALSE)
-    ##Part 3: Retag the photos
+
+    ############################
+    ##Part 3: Retag the images##
+    ############################
+
     ##Progress bar
     print("Retag progress")
     pb <- txtProgressBar(min = 0, max = nrow(min_output), style = 3)
-    ##Loop through all the photos tagging GPS info
+    ##Loop through all the images tagging GPS info
     for (i in 1:nrow(min_output))
     {
       system(paste0("exiftool -overwrite_original -F -q -gpslongitude=",
-                    min_output$long[i]," -gpslatitude=",min_output$lat[i],
+                    min_output$lon[i]," -gpslatitude=",min_output$lat[i],
                     " -gpslongituderef=",min_output$hor[i]," -gpslatituderef=",
                     min_output$ver[i]," -gpsaltitude=",min_output$alt[i],
                     " -gpsaltituderef=above ",img_path,"/",min_output$name[i]),
