@@ -2,6 +2,7 @@
 
 export(coord_convert_linux)
 export(coord_convert_windows)
+export(exif_retag)
 export(exif_retag_linux)
 export(exif_retag_windows)
 export(extract_gps_attitude_linux)
