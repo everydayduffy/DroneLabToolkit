@@ -50,9 +50,9 @@ information collected by the autopilot.
 ##### Example
 
 ```
-exif_retag_linux(timediff = 17, photo.folder.path = "/home/Photos",
-log.file.path = "/home/Logs/log1.log", proj.name = "project_1",
-csv.out = "/home/Output",leapsecs=17)
+exif_retag_linux(timediff = 17, img_path = "/home/Photos",
+log_file = "/home/Logs/log1.log", proj_name = "project_1",
+csv_out = "/home/Output",leap_secs=17)
 ```
 
 #### exif_retag_windows
@@ -67,9 +67,9 @@ defined.
 ##### Example
 
 ```
-exif_retag_windows(timediff = 17, photo.folder.path = "C:/Photos",
-log.file.path = "C:/Logs/log1.log", proj.name = "project_1",
-csv.out = "C:/Output",leapsecs=17,exif.tool.path="C:/exiftool/exiftool.exe")
+exif_retag_windows(timediff = 17, img_path = "C:/Photos",
+log_file = "C:/Logs/log1.log", proj_name = "project_1",
+csv_out = "C:/Output",leap_secs=17,exif_tool_path="C:/exiftool/exiftool.exe")
 ```
 
 #### extract_gps_attitude_linux
