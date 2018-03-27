@@ -2,6 +2,7 @@
 
 export(coord_convert_linux)
 export(coord_convert_windows)
+export(exif_coord_convert)
 export(exif_retag)
 export(exif_retag_linux)
 export(exif_retag_windows)

@@ -29,18 +29,15 @@ coord_convert_linux(in.path="/home/IN",crs.in="+init=epsg:4326",
 crs.out="+init=epsg:27700",csv=TRUE)
 ```
 
-#### coord_convert_windows
+#### exif_coord_convert
 
-This function requires the installation of [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to work.
-It is used to read the GPS exif tags from one set of photos, converts them to a new coordinate system and writes the new coordinates back onto the photos.
-
-This function is identical to `coord_convert_linux` except that the location of `exiftool.exe` has to be defined.
+This function is used to read the GPS exif tags from one set of photos, converts them to a new coordinate system and writes the new coordinates back onto the photos.
 
 ##### Example
 
 ```
-coord_convert_windows(in.path="C:/IN",crs.in="+init=epsg:4326",
-crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe", csv=TRUE)
+exif_coord_convert(img_path="C:/IN", crs_in="+init=epsg:4326",
+crs_out="+init=epsg:27700", csv=TRUE)
 ```
 
 #### exif_retag
