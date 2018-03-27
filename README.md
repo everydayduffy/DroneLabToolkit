@@ -5,6 +5,8 @@ photos with GPS data.
 
 This package requires the following packages to work correctly `dplyr`,`magrittr`,`sp` and `tidyr`.
 
+It also requires [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) for some functions. On windows systems, users will be prompted for the location of `exiftool.exe` on their machine. For mac and linux systems, the tool will be called automatically.  
+
 
 ## Installation
 
@@ -39,6 +41,17 @@ This function is identical to `coord_convert_linux` except that the location of 
 ```
 coord_convert_windows(in.path="C:/IN",crs.in="+init=epsg:4326",
 crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe", csv=TRUE)
+```
+
+#### exif_retag
+This function is used to take a `.log` dataflash file, extract GPS data and tag images with the positional
+information (x,y,z) collected by the autopilot.
+
+#### Example
+```
+exif_retag(timediff = 17, img_path = "/home/Photos",
+log_file = "/home/Logs/log1.log", proj_name = "project_1",
+csv_out = "/home/Output", leap_secs=17)
 ```
 
 #### exif_retag_linux
