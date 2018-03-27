@@ -47,7 +47,7 @@ crs.out="+init=epsg:27700",exif.tool.path="C:/exiftool/exiftool.exe", csv=TRUE)
 This function is used to take a `.log` dataflash file, extract GPS data and tag images with the positional
 information (x,y,z) collected by the autopilot.
 
-#### Example
+##### Example
 ```
 exif_retag(timediff = 17, img_path = "/home/Photos",
 log_file = "/home/Logs/log1.log", proj_name = "project_1",
@@ -66,23 +66,6 @@ information collected by the autopilot.
 exif_retag_linux(timediff = 17, img_path = "/home/Photos",
 log_file = "/home/Logs/log1.log", proj_name = "project_1",
 csv_out = "/home/Output",leap_secs=17)
-```
-
-#### exif_retag_windows
-
-This function requires the installation of [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to work.
-It is used to take a `.log` dataflash file, extract GPS information and tag photographs with the positional
-information collected by the autopilot.
-
-This function is identical to `exif_retag_linux` except that the location of `exiftool.exe` has to be
-defined.
-
-##### Example
-
-```
-exif_retag_windows(timediff = 17, img_path = "C:/Photos",
-log_file = "C:/Logs/log1.log", proj_name = "project_1",
-csv_out = "C:/Output",leap_secs=17,exif_tool_path="C:/exiftool/exiftool.exe")
 ```
 
 #### extract_gps_attitude_linux
