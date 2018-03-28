@@ -4,19 +4,19 @@
 \alias{synthesise}
 \title{Synthesise dataflash logs}
 \usage{
-synthesise(in.folder, out.folder, out.name = "Synthesised_Logs",
-  recursive = FALSE, leapsecs = seq(10:50), ...)
+synthesise(log_path, out_path, out_name = "synthesised_Logs",
+  recursive = FALSE, leap_secs = seq(10:50), ...)
 }
 \arguments{
-\item{in.folder}{The location of log files}
+\item{log_path}{The location of log files}
 
-\item{out.folder}{The location for output file}
+\item{out_path}{The location for output file}
 
-\item{out.name}{The name of the output text file. Default is 'Synthesised_Logs'}
+\item{out_name}{The name of the output text file. Default is 'synthesised_Logs'}
 
 \item{recursive}{Recursively search folders?}
 
-\item{leapsecs}{Number leapseconds in GPS time since the epoch. default
+\item{leap_secs}{Number leapseconds in GPS time since the epoch. default
 is 18}
 }
 \description{
