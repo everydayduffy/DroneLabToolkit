@@ -59,8 +59,7 @@ as a `.csv`.
 ##### Example
 
 ```
-synthesise(in.folder="C:/Logs",out.folder="C:/Out",out.name="my_logs",
-recursive=TRUE,leapsecs=17)
+synthesise(log_path="/home/logs", out_path="/home/logs", out_name="my_logs", recursive=TRUE, leap_secs=17)
 ```
 
 ## Stuck?
