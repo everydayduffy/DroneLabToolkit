@@ -2,8 +2,6 @@
 
 export(exif_coord_convert)
 export(exif_retag)
-export(extract_gps_attitude_linux)
-export(extract_gps_attitude_windows)
 export(img_path)
 export(synthesise)
 importFrom(magrittr,"%>%")
