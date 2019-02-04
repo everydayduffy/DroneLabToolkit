@@ -4,7 +4,7 @@
 \alias{synthesise}
 \title{Synthesise dataflash logs}
 \usage{
-synthesise(log_path, out_path, out_name = "synthesised_Logs",
+synthesise(log_path, out_path, out_name = "synthesised_logs",
   recursive = FALSE, leap_secs = seq(10:50), ...)
 }
 \arguments{

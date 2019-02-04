@@ -13,7 +13,7 @@
 
 synthesise <-
   #arguments needed for synthesise
-  function(log_path, out_path, out_name="synthesised_Logs",
+  function(log_path, out_path, out_name="synthesised_logs",
            recursive=FALSE, leap_secs= seq(10:50), ...){
     #leap_secs to default at 18 (as of December 2016)
     if(missing(leap_secs)){leap_secs = 18}
@@ -110,45 +110,18 @@ synthesise <-
           colnames(sub_gps_data) <- c("status","timeMS","weeks","lat","lon",
                                       "alt")
 
+          #format times and dates and duration mins
+          td_out <- format_time_date(sub_gps_data$weeks, sub_gps_data$timeMS,
+                                     epoch_date, leap_secs)
+          output$date[i] <- td_out[1]
+          output$time[i] <- td_out[2]
+          output$gps_dur_mins[i] <- td_out[3]
 
-          #convert 'weeks' data into numeric values
-          sub_gps_data$weeks <- as.numeric(as.character(sub_gps_data$weeks))
-          #create a list of GPS 'epoch' dates on which to add GPS times to
-          epoch <- data.frame(time=c(rep(epoch_date,dim(sub_gps_data)[1])))
-          #format them correctly so 'seconds' can be added
-          epoch$time <- strptime(epoch$time,"%Y-%m-%d %H:%M:%S")
-          #add seconds calculated from the data to the 'epoch' times
-          epoch$time <- epoch$time + (sub_gps_data$weeks*secs_week) +
-            (as.numeric(sub_gps_data$timeMS)/1000) - leap_secs
-          #store time and date separately in output file
-          output$date[i] <- strsplit(as.character(epoch$time[1])," +")[[1]][1]
-          output$time[i] <- strsplit(as.character(epoch$time[1])," +")[[1]][2]
-          #calculate time difference in minutes (using first and last date/times)
-          output$gps_dur_mins[i] <- round(as.numeric(difftime(epoch$time[dim(epoch)[1]],
-                                                                   epoch$time[1],units="mins")),2)
-
-
-          #format time into mm:ss
-          time_data <- strsplit(as.character(output$gps_dur_mins[i]),"[.]")
-          #if the value is a whole number (i.e just mins, no secs)
-          if (length(time_data[[1]])==1) {
-            output$gps_dur_mins[i] <- paste0(time_data[[1]][1],":00")
-          } else {
-            #if the seconds value is 2 digits (more than 9 seconds), then stitch them next to minutes
-            if (round((as.numeric(time_data[[1]][2])/100)*60,0)>9) {
-              output$gps_dur_mins[i] <- paste0(time_data[[1]][1],":",
-                                                    round((as.numeric(time_data[[1]][2])/100)*60,0))
-              #otherwise, add a trailing 0 before stitching
-            } else {
-              output$gps_dur_mins[i] <- paste0(time_data[[1]][1],":0",
-                                                    round((as.numeric(time_data[[1]][2])/100)*60,0))
-            }
-            #extract average (mode) altitude (rounded) to determine mission altitude
-            output$avg_alt[i] <- avg_alt(sub_gps_data$alt)
-            #extract max altitude (rounded)
-            output$max_alt[i] <- max_alt(sub_gps_data$alt)
+          #extract average (mode) altitude (rounded) to determine mission altitude
+          output$avg_alt[i] <- avg_alt(sub_gps_data$alt)
+          #extract max altitude (rounded)
+          output$max_alt[i] <- max_alt(sub_gps_data$alt)
           }
-        }
         else {
           print("No 3D fix data found")
           output[i,2:6] <- NA
