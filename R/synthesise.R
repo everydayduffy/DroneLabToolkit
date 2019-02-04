@@ -10,6 +10,7 @@
 #' @author James P. Duffy
 #' @export
 
+
 synthesise <-
   #arguments needed for synthesise
   function(log_path, out_path, out_name="synthesised_Logs",
@@ -143,12 +144,9 @@ synthesise <-
                                                     round((as.numeric(time_data[[1]][2])/100)*60,0))
             }
             #extract average (mode) altitude (rounded) to determine mission altitude
-            avg_alt_raw_data <- round(as.numeric(sub_gps_data$alt),0)
-            output$avg_alt[i] <- names(table(avg_alt_raw_data))[table(avg_alt_raw_data)==max(table(avg_alt_raw_data))]
-            #extract max altitutde to determine if flight was proper
-            output$max_alt[i] <- max(as.numeric(sub_gps_data$alt))
-
-
+            output$avg_alt[i] <- avg_alt(sub_gps_data$alt)
+            #extract max altitude (rounded)
+            output$max_alt[i] <- max_alt(sub_gps_data$alt)
           }
         }
         else {
