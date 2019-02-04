@@ -11,15 +11,9 @@
 #' @author James P. Duffy
 #' @export
 
-img_path <- "C:/Dropbox/Home&Away/dronelabtoolkit_test/img"
-log_file <- "C:/Dropbox/Home&Away/dronelabtoolkit_test/90 30-08-2016 13-41-50.bin.log"
-proj_name <- "test"
-csv_out <- "C:/Dropbox/Home&Away/dronelabtoolkit_test"
-exif_loc <- "C:/Software/exiftool.exe"
-time_diff <- 0
 
 extract_attitude <-
-  # arguments for exif retag
+  # arguments
   function(time_diff=0, img_path, log_file, proj_name, csv_out,
            leap_secs= seq(10:50)) {
 
@@ -41,7 +35,7 @@ extract_attitude <-
     }
 
     #leapsecs to default at 18 (as of December 2016)
-    if(missing(leapsecs)){leapsecs = 18}
+    if(missing(leap_secs)){leap_secs = 18}
 
     #############################
     ##Part 1: Obtain exif times##
@@ -70,7 +64,7 @@ extract_attitude <-
 
     #log data in old format (less than 19 columns doesn't have attitude microseconds column). Can't process it.
     if(ncol(log_data)<19){
-      stop("Cannot extract attitude information from this log.")
+      stop("Cannot extract attitude information from this log as the information has not been logged.")
     }
     #filter out ATT data
     att_data <- dplyr::filter(log_data, V1=="ATT") %>%
@@ -102,7 +96,7 @@ extract_attitude <-
     #format them correctly so 'seconds' can be added
     epoch$time <- strptime(epoch$time,"%Y-%m-%d %H:%M:%S")
     #add seconds calculated from the data to the 'epoch' times + timediff
-    epoch$time <- epoch$time + (gps_data$weeks*secs_week) + (as.numeric(gps_data$timeMS)/1000) - leapsecs
+    epoch$time <- epoch$time + (gps_data$weeks*secs_week) + (as.numeric(gps_data$timeMS)/1000) - leap_secs
     #add the time offset from particular dataset (defined at top of script)
     epoch$newtime <- epoch$time + time_diff
     #split date and time into 2 (both old and new)
