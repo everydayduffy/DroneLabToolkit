@@ -16,7 +16,7 @@ format_time_date <- function(weeks, mS, epoch_date, leap_secs) {
   epoch$time <- strptime(epoch$time,"%Y-%m-%d %H:%M:%S")
   #add seconds calculated from the data to the 'epoch' times
   epoch$time <- epoch$time + (weeks*secs_week) +
-    (as.numeric(sub_gps_data$timeMS)/1000) - leap_secs
+    (as.numeric(mS)/1000) - leap_secs
   #store time and date separately in output file
   out_date <- strsplit(as.character(epoch$time[1])," +")[[1]][1]
   out_time <- strsplit(as.character(epoch$time[1])," +")[[1]][2]
