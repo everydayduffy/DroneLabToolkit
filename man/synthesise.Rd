@@ -4,8 +4,14 @@
 \alias{synthesise}
 \title{Synthesise dataflash logs}
 \usage{
-synthesise(log_path, out_path, out_name = "synthesised_logs",
-  recursive = FALSE, leap_secs = seq(10:50), ...)
+synthesise(
+  log_path,
+  out_path,
+  out_name = "synthesised_logs",
+  recursive = FALSE,
+  leap_secs = seq(10:50),
+  ...
+)
 }
 \arguments{
 \item{log_path}{The location of log files}

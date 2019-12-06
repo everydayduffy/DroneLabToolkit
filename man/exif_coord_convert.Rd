@@ -4,8 +4,12 @@
 \alias{exif_coord_convert}
 \title{Convert coordinates found in GPS exif tags}
 \usage{
-exif_coord_convert(img_path, crs_in = "+init=epsg:4326",
-  crs_out = "+init=epsg:27700", csv = TRUE)
+exif_coord_convert(
+  img_path,
+  crs_in = "+init=epsg:4326",
+  crs_out = "+init=epsg:27700",
+  csv = TRUE
+)
 }
 \arguments{
 \item{img_path}{The full path of input photos}

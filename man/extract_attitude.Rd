@@ -4,8 +4,14 @@
 \alias{extract_attitude}
 \title{Extract GPS and attitude information for each image position.}
 \usage{
-extract_attitude(time_diff = 0, img_path, log_file, proj_name, csv_out,
-  leap_secs = seq(10:50))
+extract_attitude(
+  time_diff = 0,
+  img_path,
+  log_file,
+  proj_name,
+  csv_out,
+  leap_secs = seq(10:50)
+)
 }
 \arguments{
 \item{time_diff}{The difference in time between camera and GPS}

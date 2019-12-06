@@ -4,8 +4,15 @@
 \alias{exif_retag}
 \title{Retag images with GPS info from Ardupilot dataflash logs}
 \usage{
-exif_retag(time_diff = 0, img_path, log_file, proj_name, csv_out,
-  leap_secs = seq(10:50))
+exif_retag(
+  time_diff = 0,
+  img_path,
+  log_file,
+  proj_name,
+  csv_out,
+  exif_loc,
+  leap_secs = seq(10:50)
+)
 }
 \arguments{
 \item{time_diff}{The difference in time between camera and GPS}
@@ -17,6 +24,8 @@ exif_retag(time_diff = 0, img_path, log_file, proj_name, csv_out,
 \item{proj_name}{A name for this project (appended to output .csv)}
 
 \item{csv_out}{Output folder for .csv file}
+
+\item{exif_loc}{Location of *exiftool.exe* (Windows only)}
 
 \item{leap_secs}{Number leapseconds in GPS time since the epoch. default
 is 18}

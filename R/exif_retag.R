@@ -5,6 +5,7 @@
 #' @param log_file The full path of the associated dataflash log
 #' @param proj_name A name for this project (appended to output .csv)
 #' @param csv_out Output folder for .csv file
+#' @param exif_loc Location of *exiftool.exe* (Windows only)
 #' @param leap_secs Number leapseconds in GPS time since the epoch. default
 #' is 18
 #' @importFrom magrittr "%>%"
@@ -13,7 +14,7 @@
 
 exif_retag <-
   # arguments for exif retag
-  function(time_diff=0,img_path,log_file,proj_name,csv_out,
+  function(time_diff=0,img_path,log_file,proj_name,csv_out,exif_loc,
            leap_secs= seq(10:50)) {
 
     #function to prompt user for location of exiftool
@@ -22,15 +23,19 @@ exif_retag <-
       return(x)
     }
 
-    #if it's Windows, ask for the location of the tool
-    if (.Platform$OS.type == "windows") {
+    # if location not provided...
+    if(missing(exif_loc)) {
 
-      exif_loc <- paste0(where_tool(),"exiftool.exe")
+      #if it's Windows, ask for the location of the tool
+      if (.Platform$OS.type == "windows") {
 
-      #else for linux and mac, the tool is in the path and can be blank
-    } else {
+        exif_loc <- paste0(where_tool(),"exiftool.exe")
 
-      exif_loc <- "exiftool"
+        #else for linux and mac, the tool is in the path and can be blank
+      } else {
+
+        exif_loc <- "exiftool"
+      }
     }
 
     #number of seconds in a week
