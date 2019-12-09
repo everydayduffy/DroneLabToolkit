@@ -3,13 +3,14 @@
 #'
 #' @param log_file The full path of the dataflash log
 #' @param img_file The full path of the image
+#' @param exif_loc Location of *exiftool.exe* (Windows only)
 #' @importFrom magrittr "%>%"
 #' @author James P. Duffy
 #' @export
 
 
 find_time_diff <-
-  function(log_file, img_file, leap_secs = seq(10:50)) {
+  function(log_file, img_file, exif_loc, leap_secs = seq(10:50)) {
 
     #function to prompt user for location of exiftool
     where_tool <- function() {
@@ -17,15 +18,19 @@ find_time_diff <-
       return(x)
     }
 
-    #if it's Windows, ask for the location of the tool
-    if (.Platform$OS.type == "windows") {
+    # if location not provided...
+    if(missing(exif_loc)) {
 
-      exif_loc <- paste0(where_tool(),"exiftool.exe")
+      #if it's Windows, ask for the location of the tool
+      if (.Platform$OS.type == "windows") {
 
-      #else for linux and mac, the tool is in the path and can be blank
-    } else {
+        exif_loc <- paste0(where_tool(),"exiftool.exe")
 
-      exif_loc <- "exiftool"
+        #else for linux and mac, the tool is in the path and can be blank
+      } else {
+
+        exif_loc <- "exiftool"
+      }
     }
 
     #number of seconds in a week

@@ -5,7 +5,7 @@
 #' @param log_file The full path of the associated dataflash log
 #' @param proj_name A name for this project (appended to output .csv)
 #' @param csv_out Output folder for .csv file
-#' @param exif_loc Location of *exiftool.exe* (Windows only)
+#' @param exif_loc Location of exiftool.exe (Windows only)
 #' @param leap_secs Number leapseconds in GPS time since the epoch. default
 #' is 18
 #' @importFrom magrittr "%>%"
