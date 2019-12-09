@@ -3,7 +3,7 @@
 #'
 #' @param log_file The full path of the dataflash log
 #' @param img_file The full path of the image
-#' @param exif_loc Location of *exiftool.exe* (Windows only)
+#' @param exif_loc Location of exiftool.exe (Windows only)
 #' @importFrom magrittr "%>%"
 #' @author James P. Duffy
 #' @export

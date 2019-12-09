@@ -25,7 +25,7 @@ exif_retag(
 
 \item{csv_out}{Output folder for .csv file}
 
-\item{exif_loc}{Location of *exiftool.exe* (Windows only)}
+\item{exif_loc}{Location of exiftool.exe (Windows only)}
 
 \item{leap_secs}{Number leapseconds in GPS time since the epoch. default
 is 18}

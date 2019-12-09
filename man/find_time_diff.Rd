@@ -5,12 +5,14 @@
 \title{Estimate the time difference between a dataflash log and image capture time.
 Currently returns the time differences for a photo taken at ~4 m altitude after take-off.}
 \usage{
-find_time_diff(log_file, img_file, leap_secs = seq(10:50))
+find_time_diff(log_file, img_file, exif_loc, leap_secs = seq(10:50))
 }
 \arguments{
 \item{log_file}{The full path of the dataflash log}
 
 \item{img_file}{The full path of the image}
+
+\item{exif_loc}{Location of exiftool.exe (Windows only)}
 }
 \description{
 Estimate the time difference between a dataflash log and image capture time.
